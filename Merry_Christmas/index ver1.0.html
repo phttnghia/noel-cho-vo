@@ -75,7 +75,8 @@
         bgMusic.loop = true; bgMusic.volume = 1.0;
 
         const loader = new THREE.TextureLoader();
-        const photoFiles = ['./image1.jpeg', './image2.jpeg', './image3.jpeg', './image4.jpeg', './image5.jpeg', './image6.jpeg', './image7.jpeg', './image8.jpeg', './image9.jpeg'];
+        const timestamp = Date.now();
+        const photoFiles = ['./image1.jpeg?t=' + timestamp, './image2.jpeg?t=' + timestamp, './image3.jpeg?t=' + timestamp, './image4.jpeg?t=' + timestamp, './image5.jpeg?t=' + timestamp, './image6.jpeg?t=' + timestamp, './image7.jpeg?t=' + timestamp, './image8.jpeg?t=' + timestamp, './image9.jpeg?t=' + timestamp];
         const photoTextures = [];
         photoFiles.forEach((f, i) => photoTextures[i] = loader.load(f));
 
@@ -341,7 +342,7 @@
                 titleMesh.visible = false; starMesh.visible = false;
                 
                 const baseAngle = groupGold.rotation.y; 
-                const angleStep = (Math.PI * 2) / photoMeshes.length;
+                const angleStep = (Math.PI * 2) / 5;
                 let bestIdx = 0; let maxZ = -999;
 
                 photoMeshes.forEach((mesh, i) => {
