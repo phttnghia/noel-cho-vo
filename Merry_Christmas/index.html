@@ -482,7 +482,7 @@
 
             canvas.width = 320;  // Khớp với width của Camera Utils bên dưới
             canvas.height = 240; // Khớp với height của Camera Utils bên dưới
-            
+
             const ctx = canvas.getContext('2d');
             
             const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
@@ -522,7 +522,10 @@
             });
 
             const cameraUtils = new Camera(video, {
-                onFrame: async () => { await hands.send({image: video}); }, width: 320, height: 240
+                onFrame: async () => {
+                    frameCnt++; if(frameCnt%3 !== 0) return; 
+                    await hands.send({image: video});
+                }, width: 320, height: 240
             });
             cameraUtils.start();
         }
