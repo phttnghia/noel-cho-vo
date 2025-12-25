@@ -479,6 +479,10 @@
 
             const video = document.getElementsByClassName('input_video')[0];
             const canvas = document.getElementById('camera-preview');
+
+            canvas.width = 320;  // Khớp với width của Camera Utils bên dưới
+            canvas.height = 240; // Khớp với height của Camera Utils bên dưới
+            
             const ctx = canvas.getContext('2d');
             
             const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
