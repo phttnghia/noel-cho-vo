@@ -41,9 +41,9 @@
         /* Camera Preview Vandiep */
         #camera-preview {
             position: absolute; top: 15px; right: 15px;
-            width: 240px; height: 180px;
+            width: 120px; height: 90px;
             border: 2px solid rgba(255,0,0,0.5); 
-            transform: scaleX(-1); opacity: 0.8; border-radius: 8px;
+            transform: scaleX(-1); opacity: 0.6; border-radius: 8px;
         }
         
         /* Vandiep */
@@ -481,15 +481,11 @@
             const canvas = document.getElementById('camera-preview');
             const ctx = canvas.getContext('2d');
             
-            // Set canvas size to match camera resolution
-            canvas.width = 640;
-            canvas.height = 480;
-            
             const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
             hands.setOptions({ maxNumHands: 2, modelComplexity: 1, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
 
             hands.onResults(results => {
-                ctx.clearRect(0,0,240,180); ctx.drawImage(results.image, 0, 0, 240, 180);
+                ctx.clearRect(0,0,100,75); ctx.drawImage(results.image, 0, 0, 100, 75);
 
                 // --- Hand Logic  ---
                 if (results.multiHandLandmarks.length === 2) {
@@ -522,7 +518,7 @@
             });
 
             const cameraUtils = new Camera(video, {
-                onFrame: async () => { await hands.send({image: video}); }, width: 640, height: 480
+                onFrame: async () => { await hands.send({image: video}); }, width: 320, height: 240
             });
             cameraUtils.start();
         }
